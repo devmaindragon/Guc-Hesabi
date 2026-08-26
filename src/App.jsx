@@ -49,8 +49,8 @@ const BANNER_SRC = "";
 const APP = {
   dev: "dev.main.dragon",
   version: "1.0.0",
-  privacyUrl: "./privacy.html",
-  supportUrl: "./support.html",
+  privacyUrl: "https://devmaindragon.github.io/Guc-Hesabi/privacy.html",
+  supportUrl: "https://devmaindragon.github.io/Guc-Hesabi/support.html",
 };
 
 const T = createContext(THEME);
@@ -1286,11 +1286,21 @@ export default function App() {
             <span>·</span>
             <span>v{APP.version}</span>
             <span>·</span>
-            <a href={APP.privacyUrl} style={{ color: t.dim }}>
+            <a
+              href={APP.privacyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: t.dim }}
+            >
               {s.privacy}
             </a>
             <span>·</span>
-            <a href={APP.supportUrl} style={{ color: t.dim }}>
+            <a
+              href={APP.supportUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: t.dim }}
+            >
               {s.support}
             </a>
           </div>
