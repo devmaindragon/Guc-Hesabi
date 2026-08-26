@@ -111,6 +111,7 @@ const STR = {
       leon: "SEAT LEON",
       ibiza: "SEAT IBIZA",
       audi: "AUDI A3",
+      tt: "AUDI TT",
       skoda: "ŠKODA",
       bmw: "BMW",
       honda: "HONDA",
@@ -168,6 +169,7 @@ const STR = {
       leon: "SEAT LEON",
       ibiza: "SEAT IBIZA",
       audi: "AUDI A3",
+      tt: "AUDI TT",
       skoda: "ŠKODA",
       bmw: "BMW",
       honda: "HONDA",
@@ -225,6 +227,7 @@ const STR = {
       leon: "SEAT LEON",
       ibiza: "SEAT IBIZA",
       audi: "AUDI A3",
+      tt: "AUDI TT",
       skoda: "ŠKODA",
       bmw: "BMW",
       honda: "HONDA",
@@ -335,7 +338,7 @@ function computeBand(input) {
    ============================================================ */
 
 const GROUPS = [
-  "polo", "golf", "leon", "ibiza", "audi", "skoda", "bmw", "honda", "hyundai", "other",
+  "polo", "golf", "leon", "ibiza", "audi", "tt", "skoda", "bmw", "honda", "hyundai", "other",
 ];
 
 const CARS = [
@@ -393,6 +396,12 @@ const CARS = [
   { g: "audi", n: "S3 MK3 2.0 TSI", cdA: 0.66, loss: 18, m: 1490 },
   { g: "audi", n: "A3 MK4 1.5 TSI", cdA: 0.61, loss: 12, m: 1310 },
   { g: "audi", n: "S3 MK4 2.0 TSI", cdA: 0.64, loss: 18, m: 1550 },
+
+  /* --- Audi TT --- */
+  { g: "tt", n: "TT 8N 1.8T", cdA: 0.66, loss: 12, m: 1280 },
+  { g: "tt", n: "TT 8J 2.0 TFSI", cdA: 0.60, loss: 12, m: 1300 },
+  { g: "tt", n: "TT 8J 2.0 TFSI (EA888)", cdA: 0.60, loss: 12, m: 1310 },
+  { g: "tt", n: "TT 8S 2.0 TSI", cdA: 0.60, loss: 12, m: 1240 },
 
   /* --- Škoda --- */
   { g: "skoda", n: "Octavia MK3 1.6 TDI", cdA: 0.63, loss: 12, m: 1320 },
@@ -787,7 +796,7 @@ export default function App() {
   const [massKg, setMassKg] = useState(1495);
 
   const [mode, setMode] = useState("lib");
-  const [carIdx, setCarIdx] = useState(53);
+  const [carIdx, setCarIdx] = useState(57);
   const [cdA, setCdA] = useState(0.63);
   const [lossPct, setLossPct] = useState(15);
 
