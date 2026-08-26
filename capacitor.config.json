@@ -1,0 +1,9 @@
+{
+  "appId": "dragon.main.dev.guchesabi",
+  "appName": "Güç Hesabı",
+  "webDir": "dist",
+  "ios": {
+    "contentInset": "always",
+    "backgroundColor": "#0b0e11"
+  }
+}

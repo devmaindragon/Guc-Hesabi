@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0e11" />
+    <title>Destek · Güç Hesabı</title>
+    <style>
+      :root {
+        --bg: #0b0e11;
+        --card: #151a1f;
+        --line: #272f38;
+        --text: #f2f4f6;
+        --dim: #7b8794;
+        --accent: #d0202c;
+        --warn: #f0b429;
+        --btn: #181e25;
+        --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+        --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        padding: calc(env(safe-area-inset-top) + 16px) 12px calc(env(safe-area-inset-bottom) + 24px);
+      }
+      main { max-width: 480px; margin: 0 auto; }
+      header { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+      h1 {
+        font-family: var(--mono);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .langs { margin-left: auto; display: flex; gap: 6px; }
+      .langs button {
+        min-height: 32px;
+        padding: 0 9px;
+        background: var(--btn);
+        color: var(--dim);
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+      }
+      .langs button[aria-pressed="true"] {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 11px;
+        margin-bottom: 6px;
+      }
+      h2 {
+        font-size: 11px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--dim);
+        font-weight: 600;
+        margin: 0 0 6px;
+      }
+      p { margin: 0 0 8px; font-size: 13.5px; line-height: 1.55; }
+      p:last-child { margin-bottom: 0; }
+      ol, ul { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.6; }
+      a { color: var(--text); }
+      .warn {
+        border: 1px solid rgba(240, 180, 41, 0.2);
+        border-radius: 6px;
+        padding: 9px 11px;
+        color: var(--warn);
+        font-size: 12px;
+        line-height: 1.45;
+        margin-bottom: 6px;
+      }
+      .mail {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        line-height: 44px;
+        text-align: center;
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 3px;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+      .back {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        line-height: 44px;
+        margin-top: 6px;
+        text-align: center;
+        background: var(--btn);
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        color: var(--text);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+      .meta {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        color: var(--dim);
+        text-align: center;
+        margin-top: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1 id="title">Destek</h1>
+        <div class="langs">
+          <button data-lang="tr" aria-pressed="true">TR</button>
+          <button data-lang="en" aria-pressed="false">EN</button>
+          <button data-lang="es" aria-pressed="false">ES</button>
+        </div>
+      </header>
+      <div id="body"></div>
+      <a class="back" id="back" href="./index.html">Uygulamaya dön</a>
+      <p class="meta">dev.main.dragon · v1.0.0</p>
+    </main>
+
+    <script>
+      var CONTACT = "destek@ornek.com"; // ← kendi adresini yaz
+
+      var CONTENT = {
+        tr: {
+          title: "Destek",
+          back: "Uygulamaya dön",
+          warn:
+            "Ölçümü kapalı piste veya trafiğe kapalı yola bırak. Kamuya açık yolda hız denemesi yapma.",
+          sections: [
+            {
+              h: "Nasıl ölçüm yapılır",
+              ol: [
+                "Aracı seç; CdA, aktarma kaybı ve ağırlık otomatik dolar. Ağırlığı sürücü ve yakıta göre düzelt.",
+                "Düz, temiz ve rüzgârsız bir zemin bul. Eğimi biliyorsan gir, bilmiyorsan sıfır bırakma; küçük bir eğim bile sonucu kaydırır.",
+                "Tek vitesle 100'den 200'e çık ve süreyi ölç. Küçük motorlu ya da dizel araçlarda 60-160 aralığını kullan.",
+                "Sıcaklık, rakım ve nemi gir.",
+                "Sonuç anında güncellenir; buton yok.",
+              ],
+            },
+            {
+              h: "Sonuç dinamometreyle neden aynı değil",
+              p: [
+                "Bu bir tahmin, ölçüm değil. CdA ve aktarma kaybı kütüphanedeki tipik değerler; senin aracın modifiyeliyse ikisi de değişmiş olabilir. Sonucun yanındaki ± bandı bu belirsizliği gösterir.",
+                "Ayrıca sonuç ham değerdir, SAE veya DIN düzeltmesi uygulanmaz. Sıcak havada ölçtüğün değer ile serin havada ölçtüğün değer birebir karşılaştırılamaz.",
+              ],
+            },
+            {
+              h: "Doğruluğu artırmanın yolları",
+              ul: [
+                "Aynı yolda gidiş ve dönüş iki ölçüm yapıp ortalamasını al; rüzgâr ve eğim büyük ölçüde birbirini götürür.",
+                "Aracı tartıya çıkar. Tahmini ağırlık en sık yapılan hatadır.",
+                "Depoyu her ölçümde aynı seviyede tut.",
+                "Kilometre saatinin sapmasını GPS ile kontrol et.",
+                "Modifiyeli araçta CdA ve aktarma kaybını manuel gir.",
+              ],
+            },
+            {
+              h: "Hata bildirimi ve istek",
+              p: [
+                "Kütüphanede eksik araç, yanlış görünen bir değer ya da çeviri hatası görürsen yaz. Aracın modeli, motoru ve yılıyla birlikte bildirirsen daha hızlı düzeltilir.",
+              ],
+            },
+          ],
+          mail: "E-posta gönder",
+          subject: "Güç Hesabı · Destek",
+        },
+        en: {
+          title: "Support",
+          back: "Back to the app",
+          warn:
+            "Run measurements on a closed track or a road closed to traffic. Never attempt speed runs on public roads.",
+          sections: [
+            {
+              h: "How to measure",
+              ol: [
+                "Pick your car; CdA, drivetrain loss and weight fill in. Correct the weight for driver and fuel.",
+                "Find flat, clean, wind-free ground. Enter the grade if you know it — even a slight slope shifts the result.",
+                "Pull from 100 to 200 in a single gear and time it. Use 60-160 for small-engine or diesel cars.",
+                "Enter temperature, altitude and humidity.",
+                "The result updates instantly; there is no button.",
+              ],
+            },
+            {
+              h: "Why it differs from a dyno",
+              p: [
+                "This is an estimate, not a measurement. CdA and drivetrain loss are typical library values; on a modified car both may have changed. The ± band next to the result shows that uncertainty.",
+                "The figure is also raw — no SAE or DIN correction is applied — so a hot-day run and a cool-day run are not directly comparable.",
+              ],
+            },
+            {
+              h: "Getting closer to the truth",
+              ul: [
+                "Run the same stretch in both directions and average; wind and grade largely cancel out.",
+                "Put the car on a scale. Guessed weight is the most common error.",
+                "Keep the fuel level the same for every run.",
+                "Check your speedometer against GPS.",
+                "On a modified car, enter CdA and drivetrain loss manually.",
+              ],
+            },
+            {
+              h: "Bugs and requests",
+              p: [
+                "Write in if a car is missing, a value looks wrong or a translation is off. Include the model, engine and year and it gets fixed faster.",
+              ],
+            },
+          ],
+          mail: "Send an email",
+          subject: "Güç Hesabı · Support",
+        },
+        es: {
+          title: "Soporte",
+          back: "Volver a la app",
+          warn:
+            "Mide en circuito cerrado o en vía sin tráfico. No hagas pruebas de velocidad en carretera abierta.",
+          sections: [
+            {
+              h: "Cómo medir",
+              ol: [
+                "Elige tu coche; el CdA, la pérdida de transmisión y el peso se rellenan solos. Ajusta el peso según conductor y combustible.",
+                "Busca un tramo llano, limpio y sin viento. Introduce la pendiente si la conoces: incluso una leve inclinación desplaza el resultado.",
+                "Acelera de 100 a 200 en una sola marcha y cronometra. Usa 60-160 en coches diésel o de motor pequeño.",
+                "Introduce temperatura, altitud y humedad.",
+                "El resultado se actualiza al instante; no hay botón.",
+              ],
+            },
+            {
+              h: "Por qué difiere de un banco de potencia",
+              p: [
+                "Es una estimación, no una medición. El CdA y la pérdida de transmisión son valores típicos de la biblioteca; en un coche modificado ambos pueden haber cambiado. La banda ± junto al resultado refleja esa incertidumbre.",
+                "Además el dato es bruto, sin corrección SAE ni DIN, así que una tirada con calor y otra con frío no son directamente comparables.",
+              ],
+            },
+            {
+              h: "Cómo afinar el resultado",
+              ul: [
+                "Haz el mismo tramo en los dos sentidos y promedia; el viento y la pendiente se cancelan en gran parte.",
+                "Pesa el coche. El peso estimado es el error más frecuente.",
+                "Mantén el mismo nivel de combustible en cada tirada.",
+                "Comprueba el velocímetro con el GPS.",
+                "En un coche modificado, introduce el CdA y la pérdida a mano.",
+              ],
+            },
+            {
+              h: "Errores y sugerencias",
+              p: [
+                "Escríbenos si falta un coche, un valor parece erróneo o hay un fallo de traducción. Indica modelo, motor y año y se corrige antes.",
+              ],
+            },
+          ],
+          mail: "Enviar un correo",
+          subject: "Güç Hesabı · Soporte",
+        },
+      };
+
+      function render(lang) {
+        var c = CONTENT[lang];
+        document.documentElement.lang = lang;
+        document.getElementById("title").textContent = c.title;
+        document.getElementById("back").textContent = c.back;
+        var html = '<div class="warn">' + c.warn + "</div>";
+        c.sections.forEach(function (s) {
+          html += "<section><h2>" + s.h + "</h2>";
+          (s.p || []).forEach(function (t) {
+            html += "<p>" + t + "</p>";
+          });
+          if (s.ol) {
+            html += "<ol>";
+            s.ol.forEach(function (li) {
+              html += "<li>" + li + "</li>";
+            });
+            html += "</ol>";
+          }
+          if (s.ul) {
+            html += "<ul>";
+            s.ul.forEach(function (li) {
+              html += "<li>" + li + "</li>";
+            });
+            html += "</ul>";
+          }
+          html += "</section>";
+        });
+        html +=
+          '<a class="mail" href="mailto:' +
+          CONTACT +
+          "?subject=" +
+          encodeURIComponent(c.subject) +
+          '">' +
+          c.mail +
+          "</a>";
+        document.getElementById("body").innerHTML = html;
+        Array.prototype.forEach.call(document.querySelectorAll(".langs button"), function (b) {
+          b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
+        });
+      }
+
+      function initial() {
+        try {
+          var saved = localStorage.getItem("gh.lang");
+          if (saved && CONTENT[saved]) return saved;
+        } catch (e) {}
+        var code = (navigator.language || "en").toLowerCase().slice(0, 2);
+        return CONTENT[code] ? code : "en";
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll(".langs button"), function (b) {
+        b.addEventListener("click", function () {
+          render(b.dataset.lang);
+          try {
+            localStorage.setItem("gh.lang", b.dataset.lang);
+          } catch (e) {}
+        });
+      });
+
+      render(initial());
+    </script>
+  </body>
+</html>

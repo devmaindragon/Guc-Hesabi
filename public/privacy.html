@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0e11" />
+    <title>Gizlilik · Güç Hesabı</title>
+    <style>
+      :root {
+        --bg: #0b0e11;
+        --card: #151a1f;
+        --line: #272f38;
+        --text: #f2f4f6;
+        --dim: #7b8794;
+        --accent: #d0202c;
+        --btn: #181e25;
+        --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+        --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        padding: calc(env(safe-area-inset-top) + 16px) 12px calc(env(safe-area-inset-bottom) + 24px);
+      }
+      main { max-width: 480px; margin: 0 auto; }
+      header { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+      h1 {
+        font-family: var(--mono);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .langs { margin-left: auto; display: flex; gap: 6px; }
+      .langs button {
+        min-height: 32px;
+        padding: 0 9px;
+        background: var(--btn);
+        color: var(--dim);
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+      }
+      .langs button[aria-pressed="true"] {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 11px;
+        margin-bottom: 6px;
+      }
+      h2 {
+        font-size: 11px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--dim);
+        font-weight: 600;
+        margin: 0 0 6px;
+      }
+      p { margin: 0 0 8px; font-size: 13.5px; line-height: 1.55; }
+      p:last-child { margin-bottom: 0; }
+      ul { margin: 0 0 8px; padding-left: 18px; font-size: 13.5px; line-height: 1.55; }
+      a { color: var(--text); }
+      .meta {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        color: var(--dim);
+        text-align: center;
+        margin-top: 14px;
+      }
+      .back {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        margin-top: 10px;
+        background: var(--btn);
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 44px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1 id="title">Gizlilik</h1>
+        <div class="langs">
+          <button data-lang="tr" aria-pressed="true">TR</button>
+          <button data-lang="en" aria-pressed="false">EN</button>
+          <button data-lang="es" aria-pressed="false">ES</button>
+        </div>
+      </header>
+      <div id="body"></div>
+      <a class="back" id="back" href="./index.html">Uygulamaya dön</a>
+      <p class="meta">dev.main.dragon · v1.0.0</p>
+    </main>
+
+    <script>
+      var CONTACT = "destek@ornek.com"; // ← kendi adresini yaz
+      var UPDATED = { tr: "26 Ağustos 2026", en: "26 August 2026", es: "26 de agosto de 2026" };
+
+      var CONTENT = {
+        tr: {
+          title: "Gizlilik",
+          back: "Uygulamaya dön",
+          sections: [
+            {
+              h: "Özet",
+              p: [
+                "Güç Hesabı hesap açmanı istemez, seni tanımlamaz ve girdiğin hiçbir veriyi sunucuya göndermez. Tüm hesaplama cihazında yapılır.",
+              ],
+            },
+            {
+              h: "Toplanan veriler",
+              p: ["Uygulama şu verileri toplamaz:"],
+              ul: [
+                "Ad, e-posta, telefon veya hesap bilgisi",
+                "Konum",
+                "Kişiler, fotoğraflar, takvim veya cihazdaki diğer dosyalar",
+                "Reklam kimliği veya cihaz parmak izi",
+              ],
+            },
+            {
+              h: "Cihazda saklananlar",
+              p: [
+                "Yalnızca seçtiğin dil, tarayıcının yerel deposunda tutulur. Bu bilgi cihazından çıkmaz; uygulamayı silmen ya da site verilerini temizlemen yeterlidir.",
+                "Girdiğin süre, ağırlık, eğim ve hava değerleri hiçbir yere kaydedilmez, uygulamayı kapattığında kaybolur.",
+              ],
+            },
+            {
+              h: "Üçüncü taraflar",
+              p: [
+                "Uygulama analiz aracı, izleyici veya reklam ağı içermez. Üst bölümdeki görsel uygulamanın kendi banner'ıdır, harici bir reklam sunucusundan gelmez.",
+                "İleride reklam ya da analiz eklenirse bu metin güncellenecek ve mağaza sayfasındaki veri bildirimi buna göre değiştirilecektir.",
+              ],
+            },
+            {
+              h: "Çocuklar",
+              p: [
+                "Uygulama çocuklara yönelik değildir ve hiç kimseden yaş bilgisi istemez. Veri toplanmadığı için çocuklara ait veri de işlenmez.",
+              ],
+            },
+            {
+              h: "Haklarınız",
+              p: [
+                "Hakkında saklanan bir veri olmadığı için silme, düzeltme veya taşıma talebine konu bir kayıt bulunmaz. Yine de sorularını aşağıdaki adrese iletebilirsin.",
+              ],
+            },
+            {
+              h: "İletişim",
+              p: ['Sorular için: <a href="mailto:' + CONTACT + '">' + CONTACT + "</a>"],
+            },
+          ],
+        },
+        en: {
+          title: "Privacy",
+          back: "Back to the app",
+          sections: [
+            {
+              h: "Summary",
+              p: [
+                "Güç Hesabı asks for no account, does not identify you and sends nothing you type to a server. Every calculation runs on your device.",
+              ],
+            },
+            {
+              h: "Data we collect",
+              p: ["The app collects none of the following:"],
+              ul: [
+                "Name, email, phone or account details",
+                "Location",
+                "Contacts, photos, calendar or any other file on the device",
+                "Advertising identifiers or device fingerprints",
+              ],
+            },
+            {
+              h: "Stored on your device",
+              p: [
+                "Only your chosen language is kept, in the browser's local storage. It never leaves the device; deleting the app or clearing site data removes it.",
+                "The time, weight, grade and air values you enter are not saved anywhere and disappear when you close the app.",
+              ],
+            },
+            {
+              h: "Third parties",
+              p: [
+                "There is no analytics tool, tracker or ad network in the app. The image at the top is the app's own banner and is not served by an external ad provider.",
+                "If advertising or analytics is added later, this page will be updated and the store's data disclosure changed accordingly.",
+              ],
+            },
+            {
+              h: "Children",
+              p: [
+                "The app is not directed at children and never asks anyone's age. Since no data is collected, no children's data is processed either.",
+              ],
+            },
+            {
+              h: "Your rights",
+              p: [
+                "Because nothing about you is stored, there is no record to delete, correct or export. You are still welcome to write with any question.",
+              ],
+            },
+            {
+              h: "Contact",
+              p: ['Questions: <a href="mailto:' + CONTACT + '">' + CONTACT + "</a>"],
+            },
+          ],
+        },
+        es: {
+          title: "Privacidad",
+          back: "Volver a la app",
+          sections: [
+            {
+              h: "Resumen",
+              p: [
+                "Güç Hesabı no pide cuenta, no te identifica y no envía a ningún servidor lo que escribes. Todo el cálculo ocurre en tu dispositivo.",
+              ],
+            },
+            {
+              h: "Datos que recogemos",
+              p: ["La app no recoge nada de lo siguiente:"],
+              ul: [
+                "Nombre, correo, teléfono o datos de cuenta",
+                "Ubicación",
+                "Contactos, fotos, calendario u otros archivos del dispositivo",
+                "Identificadores publicitarios o huellas del dispositivo",
+              ],
+            },
+            {
+              h: "Guardado en tu dispositivo",
+              p: [
+                "Solo se guarda el idioma que elijas, en el almacenamiento local del navegador. No sale del dispositivo; basta con borrar la app o los datos del sitio.",
+                "El tiempo, el peso, la pendiente y los valores del aire que introduces no se guardan en ningún sitio y desaparecen al cerrar la app.",
+              ],
+            },
+            {
+              h: "Terceros",
+              p: [
+                "La app no incluye herramientas de analítica, rastreadores ni redes publicitarias. La imagen superior es el banner propio de la app y no procede de un servidor de anuncios externo.",
+                "Si más adelante se añade publicidad o analítica, esta página se actualizará y se cambiará la declaración de datos de la tienda.",
+              ],
+            },
+            {
+              h: "Menores",
+              p: [
+                "La app no está dirigida a menores y nunca pregunta la edad. Como no se recogen datos, tampoco se tratan datos de menores.",
+              ],
+            },
+            {
+              h: "Tus derechos",
+              p: [
+                "Al no guardarse nada sobre ti, no hay registro que borrar, corregir o exportar. Aun así, puedes escribirnos con cualquier duda.",
+              ],
+            },
+            {
+              h: "Contacto",
+              p: ['Preguntas: <a href="mailto:' + CONTACT + '">' + CONTACT + "</a>"],
+            },
+          ],
+        },
+      };
+
+      var UPDATED_LABEL = { tr: "Son güncelleme", en: "Last updated", es: "Última actualización" };
+
+      function render(lang) {
+        var c = CONTENT[lang];
+        document.documentElement.lang = lang;
+        document.getElementById("title").textContent = c.title;
+        document.getElementById("back").textContent = c.back;
+        var html = "";
+        c.sections.forEach(function (s) {
+          html += "<section><h2>" + s.h + "</h2>";
+          (s.p || []).forEach(function (t) {
+            html += "<p>" + t + "</p>";
+          });
+          if (s.ul) {
+            html += "<ul>";
+            s.ul.forEach(function (li) {
+              html += "<li>" + li + "</li>";
+            });
+            html += "</ul>";
+          }
+          html += "</section>";
+        });
+        html +=
+          '<section><p style="color:var(--dim);font-size:12px;margin:0">' +
+          UPDATED_LABEL[lang] +
+          ": " +
+          UPDATED[lang] +
+          "</p></section>";
+        document.getElementById("body").innerHTML = html;
+        Array.prototype.forEach.call(document.querySelectorAll(".langs button"), function (b) {
+          b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
+        });
+      }
+
+      function initial() {
+        try {
+          var saved = localStorage.getItem("gh.lang");
+          if (saved && CONTENT[saved]) return saved;
+        } catch (e) {}
+        var code = (navigator.language || "en").toLowerCase().slice(0, 2);
+        return CONTENT[code] ? code : "en";
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll(".langs button"), function (b) {
+        b.addEventListener("click", function () {
+          render(b.dataset.lang);
+          try {
+            localStorage.setItem("gh.lang", b.dataset.lang);
+          } catch (e) {}
+        });
+      });
+
+      render(initial());
+    </script>
+  </body>
+</html>
