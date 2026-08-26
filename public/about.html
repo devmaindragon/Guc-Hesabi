@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0e11" />
+    <title>Güç Hesabı</title>
+    <meta
+      name="description"
+      content="Aracının 100-200 km/s hızlanma süresinden motor gücünü HP olarak hesapla."
+    />
+    <link rel="icon" type="image/png" href="./favicon.png" />
+
+    <meta property="og:title" content="Güç Hesabı" />
+    <meta
+      property="og:description"
+      content="100-200 km/s hızlanma süresinden HP hesabı. 71 araçlık kütüphane, anlık sonuç."
+    />
+    <meta property="og:image" content="./banner.png" />
+    <meta property="og:type" content="website" />
+
+    <style>
+      :root {
+        --bg: #0b0e11;
+        --card: #151a1f;
+        --line: #272f38;
+        --text: #f2f4f6;
+        --dim: #7b8794;
+        --accent: #d0202c;
+        --warn: #f0b429;
+        --btn: #181e25;
+        --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+        --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+          sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        padding: calc(env(safe-area-inset-top) + 16px) 12px
+          calc(env(safe-area-inset-bottom) + 24px);
+      }
+      main {
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 18px;
+      }
+      header img {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+        display: block;
+      }
+      .wordmark {
+        font-family: var(--mono);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .langs {
+        margin-left: auto;
+        display: flex;
+        gap: 6px;
+      }
+      .langs button {
+        min-height: 32px;
+        padding: 0 9px;
+        background: var(--btn);
+        color: var(--dim);
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+      }
+      .langs button[aria-pressed="true"] {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+
+      /* --- hero --- */
+      .hero {
+        text-align: center;
+        padding: 14px 0 22px;
+      }
+      .hero img.mark {
+        width: 96px;
+        height: 96px;
+        border-radius: 18px;
+        display: block;
+        margin: 0 auto 16px;
+        border: 1px solid var(--line);
+      }
+      h1 {
+        font-family: var(--mono);
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
+      }
+      .tagline {
+        font-size: 15px;
+        line-height: 1.5;
+        color: var(--dim);
+        margin: 0 auto 18px;
+        max-width: 420px;
+      }
+      .cta {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .cta a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 16px;
+        border-radius: 3px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+      .cta a.primary {
+        background: var(--accent);
+        color: #fff;
+        border: 1px solid var(--accent);
+      }
+      .cta a.ghost {
+        background: var(--btn);
+        color: var(--text);
+        border: 1px solid var(--line);
+      }
+
+      /* --- ortak kart --- */
+      section {
+        margin-bottom: 6px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 14px;
+      }
+      .label {
+        font-size: 11px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--dim);
+        font-weight: 600;
+        display: block;
+        margin-bottom: 10px;
+      }
+      h2 {
+        font-size: 16px;
+        margin: 0 0 8px;
+        letter-spacing: -0.01em;
+      }
+      p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--dim);
+        margin: 0 0 10px;
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
+      strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      /* --- adımlar --- */
+      ol.steps {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        counter-reset: s;
+      }
+      ol.steps li {
+        counter-increment: s;
+        display: flex;
+        gap: 11px;
+        padding: 11px 0;
+        border-top: 1px solid var(--line);
+      }
+      ol.steps li:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+      ol.steps li::before {
+        content: counter(s);
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent);
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        width: 26px;
+        height: 26px;
+        flex: 0 0 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      ol.steps h3 {
+        font-size: 14px;
+        margin: 3px 0 3px;
+      }
+      ol.steps p {
+        font-size: 13px;
+        margin: 0;
+      }
+
+      /* --- özellikler --- */
+      ul.feats {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1px;
+      }
+      ul.feats li {
+        font-size: 13.5px;
+        line-height: 1.5;
+        color: var(--dim);
+        padding: 9px 0;
+        border-top: 1px solid var(--line);
+        display: flex;
+        gap: 9px;
+      }
+      ul.feats li:first-child {
+        border-top: none;
+      }
+      ul.feats li::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: var(--accent);
+        flex: 0 0 6px;
+        margin-top: 7px;
+      }
+
+      /* --- formül --- */
+      pre {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        line-height: 1.7;
+        color: var(--text);
+        background: var(--btn);
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        padding: 11px;
+        margin: 0 0 10px;
+        overflow-x: auto;
+      }
+
+      /* --- uyarı --- */
+      .warn {
+        display: flex;
+        gap: 9px;
+        align-items: flex-start;
+        border: 1px solid rgba(240, 180, 41, 0.25);
+        border-radius: 6px;
+        padding: 11px;
+        font-size: 12.5px;
+        line-height: 1.5;
+        color: var(--warn);
+      }
+      .warn::before {
+        content: "!";
+        font-family: var(--mono);
+        font-weight: 800;
+        flex: 0 0 auto;
+      }
+
+      footer {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding-top: 18px;
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.06em;
+        color: var(--dim);
+      }
+      footer a {
+        color: var(--dim);
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <img src="./favicon.png" alt="" />
+        <span class="wordmark">Güç Hesabı</span>
+        <div class="langs">
+          <button data-lang="tr">TR</button>
+          <button data-lang="en">EN</button>
+          <button data-lang="es">ES</button>
+        </div>
+      </header>
+
+      <div class="hero">
+        <img class="mark" src="./favicon.png" alt="" />
+        <h1 id="h-title">Güç Hesabı</h1>
+        <p class="tagline" id="h-tagline"></p>
+        <div class="cta">
+          <a class="primary" id="cta-try" href="./index.html"></a>
+          <a class="ghost" id="cta-store" href="#"></a>
+        </div>
+      </div>
+
+      <div id="body"></div>
+
+      <footer>
+        <span id="f-dev">dev.main.dragon</span>
+        <span>·</span>
+        <span id="f-ver">v1.0.0</span>
+        <span>·</span>
+        <a href="./privacy.html" id="f-privacy">Gizlilik</a>
+        <span>·</span>
+        <a href="./support.html" id="f-support">Destek</a>
+      </footer>
+    </main>
+
+    <script>
+      /* App Store bağlantın hazır olunca buraya yaz. Boşsa buton gizlenir. */
+      var STORE_URL = "";
+
+      var C = {
+        tr: {
+          tagline:
+            "Aracının 100-200 km/s hızlanma süresini gir, motor gücünü HP olarak öğren.",
+          try: "Web'de dene",
+          store: "App Store",
+          whatLabel: "Ne yapar",
+          whatH: "Tek bir süreden gerçek güç",
+          whatP: [
+            "Kapalı pistte kronometreyle ölçtüğün <strong>100-200 km/s</strong> süresini gir, uygulama aracının motor gücünü HP cinsinden çözer.",
+            "Bu aralık tesadüf değil. Kalkışta çekiş kaybı, sürücünün debriyaj tekniği ve ilk vites farkları sonucu bozar. 100 km/s üzerinde bunların hepsi ortadan kalkar, geriye motorun asıl işi kalır. Dizel ve düşük güçlü araçlar için <strong>60-160 km/s</strong> aralığı da var.",
+          ],
+          howLabel: "Nasıl kullanılır",
+          steps: [
+            {
+              h: "Aracını seç",
+              p: "71 araçlık kütüphaneden seç; sürtünme alanı, aktarma kaybı ve ağırlık kendiliğinden dolar. Ya da hepsini elle gir.",
+            },
+            {
+              h: "Süreyi gir",
+              p: "Ölçtüğün 100-200 süresini yaz. Yolun eğimini de ekle, uygulama yokuşu hesaba katar.",
+            },
+            {
+              h: "Havayı ayarla",
+              p: "Sıcaklık, rakım ve nem. Bu üçü hava yoğunluğunu belirler, yoğunluk da sürüklenme direncini.",
+            },
+            {
+              h: "Sonucu oku",
+              p: "Hesap anında güncellenir. Kaydet düğmesi yok, hesap açmak yok.",
+            },
+          ],
+          featLabel: "Öne çıkanlar",
+          feats: [
+            "100-200 km/s hızlanma süresinden HP hesabı",
+            "Dizel ve düşük güçlü araçlar için 60-160 km/s aralığı",
+            "71 araçlık kütüphane: Polo, Golf, Leon, Ibiza, A3, Octavia, BMW, Civic ve daha fazlası",
+            "Her araç için hazır CdA ve aktarma kaybı, istersen elle giriş",
+            "Sıcaklık, rakım ve neme göre hava yoğunluğu düzeltmesi",
+            "Yol eğimi telafisi, yokuş yukarı ve aşağı",
+            "Tek rakam yerine gerçekçi belirsizlik aralığı",
+            "Gücün nereye gittiğini gösteren dağılım: ivme, hava, yuvarlanma, eğim",
+            "Teker gücü, krank gücü, kW ve güç/ağırlık oranı",
+            "Türkçe, İngilizce, İspanyolca",
+          ],
+          mathLabel: "Arkasındaki hesap",
+          mathH: "Tahmin değil, çözüm",
+          mathP: [
+            "Uygulama bir tablodan değer okumaz. Ölçtüğün sürede aracın yaptığı işi dört parçaya ayırır ve geriye doğru güç çözer:",
+            "Hava yoğunluğu barometrik formül ve Buck denklemiyle bulunur. Yuvarlanma direnci katsayısı 0,012, dönen kütle katsayısı 1,04 alınır. Sonuç ham değerdir; SAE veya DIN düzeltmesi uygulanmaz, bu yüzden farklı hava koşullarında alınan iki ölçüm birebir karşılaştırılamaz.",
+          ],
+          formula:
+            "P_teker = ivme + hava sürüklenmesi + yuvarlanma + eğim\nP_motor = P_teker / (1 − aktarma kaybı)",
+          warn:
+            "Ölçümü yalnızca kapalı pistte veya trafiğe kapalı yolda yap. Uygulama hız ölçmez ve hızlı sürmeyi teşvik etmez; süreyi sen girersin.",
+          privacy: "Gizlilik",
+          support: "Destek",
+        },
+
+        en: {
+          tagline:
+            "Enter your car's 100-200 km/h acceleration time and get its engine power in HP.",
+          try: "Try on the web",
+          store: "App Store",
+          whatLabel: "What it does",
+          whatH: "Real power from one timed run",
+          whatP: [
+            "Enter the <strong>100-200 km/h</strong> time you measured on a closed track and the app solves for your engine's power in HP.",
+            "That range is not arbitrary. Off the line, traction loss, clutch technique and first-gear differences corrupt the result. Above 100 km/h all of that disappears, leaving the engine's actual work. A <strong>60-160 km/h</strong> range is there for diesels and lower-powered cars.",
+          ],
+          howLabel: "How to use it",
+          steps: [
+            {
+              h: "Pick your car",
+              p: "Choose from a 71-car library; drag area, drivetrain loss and weight fill in automatically. Or enter everything by hand.",
+            },
+            {
+              h: "Enter the time",
+              p: "Type the 100-200 time you measured. Add the road gradient and the app accounts for the slope.",
+            },
+            {
+              h: "Set the air",
+              p: "Temperature, altitude and humidity. These three set air density, and density sets drag.",
+            },
+            {
+              h: "Read the result",
+              p: "It updates instantly. No save button, no account.",
+            },
+          ],
+          featLabel: "Highlights",
+          feats: [
+            "HP from your 100-200 km/h acceleration time",
+            "60-160 km/h range for diesels and lower-powered cars",
+            "71-car library: Polo, Golf, Leon, Ibiza, A3, Octavia, BMW, Civic and more",
+            "Preset CdA and drivetrain loss per car, or full manual entry",
+            "Air density correction from temperature, altitude and humidity",
+            "Road gradient compensation, uphill and downhill",
+            "A realistic uncertainty band instead of a single number",
+            "Power split showing where it goes: acceleration, drag, rolling, gradient",
+            "Wheel power, crank power, kW and power-to-weight ratio",
+            "Turkish, English, Spanish",
+          ],
+          mathLabel: "The maths behind it",
+          mathH: "Solved, not guessed",
+          mathP: [
+            "The app does not look values up in a table. It splits the work your car did during the measured run into four parts and solves backwards for power:",
+            "Air density comes from the barometric formula and the Buck equation. Rolling resistance is taken as 0.012 and the rotating mass factor as 1.04. The result is uncorrected; no SAE or DIN correction is applied, so two runs taken in different conditions are not directly comparable.",
+          ],
+          formula:
+            "P_wheel = acceleration + drag + rolling + gradient\nP_crank = P_wheel / (1 − drivetrain loss)",
+          warn:
+            "Only take measurements on a closed track or a road closed to traffic. The app does not measure speed and does not encourage fast driving; you enter the time yourself.",
+          privacy: "Privacy",
+          support: "Support",
+        },
+
+        es: {
+          tagline:
+            "Introduce el tiempo de 100-200 km/h de tu coche y obtén la potencia de su motor en CV.",
+          try: "Probar en la web",
+          store: "App Store",
+          whatLabel: "Qué hace",
+          whatH: "Potencia real con un solo cronometraje",
+          whatP: [
+            "Introduce el tiempo de <strong>100-200 km/h</strong> medido en circuito cerrado y la app resuelve la potencia de tu motor en CV.",
+            "Ese rango no es casual. En la salida, la pérdida de tracción, la técnica de embrague y las diferencias de primera marcha estropean el resultado. Por encima de 100 km/h todo eso desaparece y queda el trabajo del motor. También hay un rango de <strong>60-160 km/h</strong> para diésel y coches de menor potencia.",
+          ],
+          howLabel: "Cómo se usa",
+          steps: [
+            {
+              h: "Elige tu coche",
+              p: "Selecciona de una biblioteca de 71 coches; área frontal, pérdida de transmisión y peso se rellenan solos. O introdúcelo todo a mano.",
+            },
+            {
+              h: "Introduce el tiempo",
+              p: "Escribe el tiempo de 100-200 que mediste. Añade la pendiente y la app la tiene en cuenta.",
+            },
+            {
+              h: "Ajusta el aire",
+              p: "Temperatura, altitud y humedad. Estos tres fijan la densidad del aire, y la densidad fija la resistencia.",
+            },
+            {
+              h: "Lee el resultado",
+              p: "Se actualiza al instante. Sin botón de guardar y sin cuenta.",
+            },
+          ],
+          featLabel: "Destacado",
+          feats: [
+            "CV a partir del tiempo de aceleración de 100-200 km/h",
+            "Rango de 60-160 km/h para diésel y coches de menor potencia",
+            "Biblioteca de 71 coches: Polo, Golf, Leon, Ibiza, A3, Octavia, BMW, Civic y más",
+            "CdA y pérdida de transmisión predefinidos, o entrada manual completa",
+            "Corrección por densidad del aire: temperatura, altitud y humedad",
+            "Compensación de pendiente, en subida y en bajada",
+            "Un margen de incertidumbre realista en lugar de una sola cifra",
+            "Reparto de potencia: aceleración, aire, rodadura, pendiente",
+            "Potencia a la rueda, al cigüeñal, kW y relación potencia/peso",
+            "Turco, inglés, español",
+          ],
+          mathLabel: "El cálculo detrás",
+          mathH: "Resuelto, no adivinado",
+          mathP: [
+            "La app no consulta valores en una tabla. Divide el trabajo que hizo tu coche durante el tiempo medido en cuatro partes y resuelve la potencia hacia atrás:",
+            "La densidad del aire se obtiene con la fórmula barométrica y la ecuación de Buck. La resistencia a la rodadura se toma como 0,012 y el factor de masa rotativa como 1,04. El resultado es bruto; no se aplica corrección SAE ni DIN, así que dos mediciones en condiciones distintas no son directamente comparables.",
+          ],
+          formula:
+            "P_rueda = aceleración + aire + rodadura + pendiente\nP_cigüeñal = P_rueda / (1 − pérdida de transmisión)",
+          warn:
+            "Realiza la medición solo en circuito cerrado o en vía sin tráfico. La app no mide la velocidad ni fomenta la conducción rápida; el tiempo lo introduces tú.",
+          privacy: "Privacidad",
+          support: "Soporte",
+        },
+      };
+
+      function esc(x) {
+        return x;
+      }
+
+      function render(lang) {
+        var c = C[lang] || C.en;
+        document.documentElement.lang = lang;
+
+        document.getElementById("h-tagline").innerHTML = c.tagline;
+
+        var tryBtn = document.getElementById("cta-try");
+        tryBtn.textContent = c.try;
+
+        var storeBtn = document.getElementById("cta-store");
+        if (STORE_URL) {
+          storeBtn.textContent = c.store;
+          storeBtn.href = STORE_URL;
+          storeBtn.style.display = "";
+        } else {
+          storeBtn.style.display = "none";
+        }
+
+        var h = "";
+
+        h += '<section class="card">';
+        h += '<span class="label">' + c.whatLabel + "</span>";
+        h += "<h2>" + c.whatH + "</h2>";
+        c.whatP.forEach(function (p) {
+          h += "<p>" + p + "</p>";
+        });
+        h += "</section>";
+
+        h += '<section class="card">';
+        h += '<span class="label">' + c.howLabel + "</span>";
+        h += '<ol class="steps">';
+        c.steps.forEach(function (s) {
+          h += "<li><div><h3>" + s.h + "</h3><p>" + s.p + "</p></div></li>";
+        });
+        h += "</ol></section>";
+
+        h += '<section class="card">';
+        h += '<span class="label">' + c.featLabel + "</span>";
+        h += '<ul class="feats">';
+        c.feats.forEach(function (f) {
+          h += "<li>" + f + "</li>";
+        });
+        h += "</ul></section>";
+
+        h += '<section class="card">';
+        h += '<span class="label">' + c.mathLabel + "</span>";
+        h += "<h2>" + c.mathH + "</h2>";
+        h += "<p>" + c.mathP[0] + "</p>";
+        h += "<pre>" + c.formula + "</pre>";
+        h += "<p>" + c.mathP[1] + "</p>";
+        h += "</section>";
+
+        h += '<section class="warn">' + c.warn + "</section>";
+
+        document.getElementById("body").innerHTML = h;
+
+        document.getElementById("f-privacy").textContent = c.privacy;
+        document.getElementById("f-support").textContent = c.support;
+
+        Array.prototype.forEach.call(document.querySelectorAll(".langs button"), function (b) {
+          b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
+        });
+      }
+
+      function initial() {
+        try {
+          var saved = localStorage.getItem("gh.lang");
+          if (saved && C[saved]) return saved;
+        } catch (e) {}
+        var code = (navigator.language || "en").toLowerCase().slice(0, 2);
+        return C[code] ? code : "en";
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll(".langs button"), function (b) {
+        b.addEventListener("click", function () {
+          render(b.dataset.lang);
+          try {
+            localStorage.setItem("gh.lang", b.dataset.lang);
+          } catch (e) {}
+        });
+      });
+
+      render(initial());
+    </script>
+  </body>
+</html>

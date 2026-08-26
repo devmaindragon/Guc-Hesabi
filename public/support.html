@@ -98,23 +98,6 @@
         text-transform: uppercase;
         text-decoration: none;
       }
-      .back {
-        display: block;
-        width: 100%;
-        min-height: 44px;
-        line-height: 44px;
-        margin-top: 6px;
-        text-align: center;
-        background: var(--btn);
-        border: 1px solid var(--line);
-        border-radius: 3px;
-        color: var(--text);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.09em;
-        text-transform: uppercase;
-        text-decoration: none;
-      }
       .meta {
         font-family: var(--mono);
         font-size: 10px;
@@ -136,7 +119,6 @@
         </div>
       </header>
       <div id="body"></div>
-      <a class="back" id="back" href="./index.html">Uygulamaya dön</a>
       <p class="meta">dev.main.dragon · v1.0.0</p>
     </main>
 
@@ -146,7 +128,6 @@
       var CONTENT = {
         tr: {
           title: "Destek",
-          back: "Uygulamaya dön",
           warn:
             "Ölçümü kapalı piste veya trafiğe kapalı yola bırak. Kamuya açık yolda hız denemesi yapma.",
           sections: [
@@ -189,7 +170,6 @@
         },
         en: {
           title: "Support",
-          back: "Back to the app",
           warn:
             "Run measurements on a closed track or a road closed to traffic. Never attempt speed runs on public roads.",
           sections: [
@@ -232,7 +212,6 @@
         },
         es: {
           title: "Soporte",
-          back: "Volver a la app",
           warn:
             "Mide en circuito cerrado o en vía sin tráfico. No hagas pruebas de velocidad en carretera abierta.",
           sections: [
@@ -279,7 +258,6 @@
         var c = CONTENT[lang];
         document.documentElement.lang = lang;
         document.getElementById("title").textContent = c.title;
-        document.getElementById("back").textContent = c.back;
         var html = '<div class="warn">' + c.warn + "</div>";
         c.sections.forEach(function (s) {
           html += "<section><h2>" + s.h + "</h2>";

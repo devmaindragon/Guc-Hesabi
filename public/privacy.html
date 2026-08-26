@@ -80,24 +80,6 @@
         text-align: center;
         margin-top: 14px;
       }
-      .back {
-        display: block;
-        width: 100%;
-        min-height: 44px;
-        margin-top: 10px;
-        background: var(--btn);
-        border: 1px solid var(--line);
-        border-radius: 3px;
-        color: var(--text);
-        font-family: var(--sans);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.09em;
-        text-transform: uppercase;
-        text-align: center;
-        line-height: 44px;
-        text-decoration: none;
-      }
     </style>
   </head>
   <body>
@@ -111,7 +93,6 @@
         </div>
       </header>
       <div id="body"></div>
-      <a class="back" id="back" href="./index.html">Uygulamaya dön</a>
       <p class="meta">dev.main.dragon · v1.0.0</p>
     </main>
 
@@ -122,7 +103,6 @@
       var CONTENT = {
         tr: {
           title: "Gizlilik",
-          back: "Uygulamaya dön",
           sections: [
             {
               h: "Özet",
@@ -174,7 +154,6 @@
         },
         en: {
           title: "Privacy",
-          back: "Back to the app",
           sections: [
             {
               h: "Summary",
@@ -226,7 +205,6 @@
         },
         es: {
           title: "Privacidad",
-          back: "Volver a la app",
           sections: [
             {
               h: "Resumen",
@@ -284,7 +262,6 @@
         var c = CONTENT[lang];
         document.documentElement.lang = lang;
         document.getElementById("title").textContent = c.title;
-        document.getElementById("back").textContent = c.back;
         var html = "";
         c.sections.forEach(function (s) {
           html += "<section><h2>" + s.h + "</h2>";
