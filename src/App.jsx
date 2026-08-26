@@ -43,7 +43,7 @@ const THEME = {
 
 /* Banner görselini buraya koy: import edilen dosya, public yolu ya da data-URI.
    Boş bırakılırsa 320x50 yer tutucu görünür. */
-const BANNER_SRC = "";
+const BANNER_SRC = "./banner.png";
 
 /* Künye — sürüm ve bağlantılar buradan yönetilir */
 const APP = {
