@@ -119,7 +119,7 @@
         </div>
       </header>
       <div id="body"></div>
-      <p class="meta">dev.main.dragon · v1.0.0</p>
+      <p class="meta">dev.main.dragon · v1.0.2</p>
     </main>
 
     <script>
@@ -134,17 +134,45 @@
             {
               h: "Nasıl ölçüm yapılır",
               ol: [
-                "Aracı seç; CdA, aktarma kaybı ve ağırlık otomatik dolar. Ağırlığı sürücü ve yakıta göre düzelt.",
-                "Düz, temiz ve rüzgârsız bir zemin bul. Eğimi biliyorsan gir, bilmiyorsan sıfır bırakma; küçük bir eğim bile sonucu kaydırır.",
+                "Ölçüm ekranının üstündeki araç barına dokun ve garajından bir araç seç. Sürtünme alanı, aktarma kaybı ve ağırlık kendiliğinden dolar.",
+                "Ağırlığı gerçek duruma göre düzelt: sürücü, yolcu ve depodaki yakıt dahil.",
+                "Düz, temiz ve rüzgârsız bir zemin bul. Eğimi biliyorsan gir; küçük bir eğim bile sonucu kaydırır.",
                 "Tek vitesle 100'den 200'e çık ve süreyi ölç. Küçük motorlu ya da dizel araçlarda 60-160 aralığını kullan.",
-                "Sıcaklık, rakım ve nemi gir.",
-                "Sonuç anında güncellenir; buton yok.",
+                "Hava koşulları satırını aç, sıcaklık, rakım ve nemi gir.",
+                "Sonuç anında görünür. Kaydetmek istersen KOŞUYU KAYDET'e bas, istersen not düş.",
+              ],
+            },
+            {
+              h: "Garaj ve koşu geçmişi",
+              p: [
+                "Garaj sekmesi araçlarını tutar. Bir araca dokunmak onu ölçüm için seçer; aynı satırdaki kalemle değerlerini düzenleyebilir, çöp kutusuyla silebilirsin.",
+                "Kaydettiğin her koşu seçili aracın geçmişine işlenir. Grafikte gidişatı, altında son değerini, en iyi değerini ve ilk koşuna göre toplam farkı görürsün. Her koşunun yanında bir öncekine göre farkı yazar.",
+                "Modifiye öncesi bir ölçüm alıp sonrasında tekrar ölçersen, aradaki farkı tahmin etmek yerine görmüş olursun.",
+              ],
+            },
+            {
+              h: "Simülasyon ve hedef hesabı",
+              p: [
+                "Simülasyon sekmesi kayıtlı bir koşuyu temel alır. Ağırlık ve güç kaydırıcılarını oynatınca süre yeniden çözülür: 80 kilo atsan ya da 50 beygir eklesen ne olurdu.",
+                "Hedef hesabı tersini yapar. Ulaşmak istediğin gücü girersin, o güce karşılık gelen süreyi söyler. Motorun dirençleri yenemeyeceği bir değer girersen uyarır.",
+                "Birden fazla kayıtlı koşun varsa KOŞUYU DEĞİŞTİR ile temeli seçebilirsin.",
+              ],
+            },
+            {
+              h: "Kütüphanede olmayan araç",
+              p: [
+                "Garaj sekmesinde KENDİM GİRECEĞİM'e bas. Ad, sürtünme alanı, aktarma kaybı ve ağırlık girersin; araç garajına eklenir ve kütüphanedekiler gibi kullanılır.",
+                "Değerleri bilmiyorsan önce benzer bir aracı seç, sonra yeni araç formunu aç: alanlar o aracın değerleriyle dolu gelir, üstünde oynarsın.",
+              ],
+              ul: [
+                "Aktarma kaybı: önden çekiş %12, arkadan itiş %15, dört çeker %18-20",
+                "Sürtünme alanı: küçük hatchback 0,60-0,65 · sedan 0,60-0,66 · SUV 0,80-0,90",
               ],
             },
             {
               h: "Sonuç dinamometreyle neden aynı değil",
               p: [
-                "Bu bir tahmin, ölçüm değil. CdA ve aktarma kaybı kütüphanedeki tipik değerler; senin aracın modifiyeliyse ikisi de değişmiş olabilir. Sonucun yanındaki ± bandı bu belirsizliği gösterir.",
+                "Bu bir tahmin, ölçüm değil. Sürtünme alanı ve aktarma kaybı kütüphanedeki tipik değerler; senin aracın modifiyeliyse ikisi de değişmiş olabilir. Sonucun yanındaki ± bandı bu belirsizliği gösterir.",
                 "Ayrıca sonuç ham değerdir, SAE veya DIN düzeltmesi uygulanmaz. Sıcak havada ölçtüğün değer ile serin havada ölçtüğün değer birebir karşılaştırılamaz.",
               ],
             },
@@ -155,7 +183,21 @@
                 "Aracı tartıya çıkar. Tahmini ağırlık en sık yapılan hatadır.",
                 "Depoyu her ölçümde aynı seviyede tut.",
                 "Kilometre saatinin sapmasını GPS ile kontrol et.",
-                "Modifiyeli araçta CdA ve aktarma kaybını manuel gir.",
+                "Modifiyeli araçta sürtünme alanını ve aktarma kaybını kendin gir.",
+              ],
+            },
+            {
+              h: "Verilerim nerede duruyor",
+              p: [
+                "Araçların, koşuların ve notların yalnızca telefonunda saklanır. Hiçbir şey sunucuya gönderilmez, hesap açman gerekmez, uygulama internet bağlantısı olmadan da çalışır.",
+                "Bunun karşılığı şu: uygulamayı silersen kayıtların da silinir ve geri getirilemez. Yeni bir telefona geçtiğinde kayıtlar taşınmaz.",
+              ],
+            },
+            {
+              h: "Dil",
+              p: [
+                "Uygulama cihazının diline göre açılır; Türkçe, İngilizce ve İspanyolca desteklenir. Sağ üstteki dil düğmesinden değiştirebilirsin, seçimin hatırlanır.",
+                "Kullanım rehberini tekrar görmek istersen sayfanın altındaki Nasıl kullanılır bağlantısına dokun.",
               ],
             },
             {
@@ -168,6 +210,7 @@
           mail: "E-posta gönder",
           subject: "Güç Hesabı · Destek",
         },
+
         en: {
           title: "Support",
           warn:
@@ -176,76 +219,161 @@
             {
               h: "How to measure",
               ol: [
-                "Pick your car; CdA, drivetrain loss and weight fill in. Correct the weight for driver and fuel.",
-                "Find flat, clean, wind-free ground. Enter the grade if you know it — even a slight slope shifts the result.",
-                "Pull from 100 to 200 in a single gear and time it. Use 60-160 for small-engine or diesel cars.",
-                "Enter temperature, altitude and humidity.",
-                "The result updates instantly; there is no button.",
+                "Tap the vehicle bar at the top of the measurement screen and pick a car from your garage. Drag area, drivetrain loss and weight fill in automatically.",
+                "Correct the weight for reality: driver, passengers and the fuel in the tank.",
+                "Find flat, clean, still-air tarmac. Enter the gradient if you know it; even a slight slope shifts the result.",
+                "Pull from 100 to 200 in a single gear and time it. Use the 60-160 range for smaller engines and diesels.",
+                "Open the air conditions row and enter temperature, altitude and humidity.",
+                "The result appears instantly. Press SAVE RUN to keep it, and add a note if you want.",
+              ],
+            },
+            {
+              h: "Garage and run history",
+              p: [
+                "The garage tab holds your cars. Tapping one selects it for measuring; the pencil on the same row edits its figures and the bin deletes it.",
+                "Every run you save is filed under the selected car. The chart shows the progression, and below it your latest figure, your best, and the total gain since your first run. Each run also shows the difference from the one before it.",
+                "Measure once before a modification and again after it, and the gain stops being a guess.",
+              ],
+            },
+            {
+              h: "Simulator and target mode",
+              p: [
+                "The simulator tab works from a saved run. Move the weight and power sliders and the time is solved again: what would happen 80 kg lighter, or with 50 more horsepower.",
+                "Target mode runs the other way. Enter the power you are aiming for and it returns the time that matches. If the figure is too low to overcome the resistances, it says so.",
+                "With more than one saved run, CHANGE RUN lets you pick the baseline.",
+              ],
+            },
+            {
+              h: "A car that isn't in the library",
+              p: [
+                "In the garage tab press ENTER MY OWN. Give it a name, drag area, drivetrain loss and weight; the car joins your garage and behaves like any library entry.",
+                "If you don't know the figures, select a similar car first and then open the new-car form: the fields arrive filled with that car's values, ready to adjust.",
+              ],
+              ul: [
+                "Drivetrain loss: front-wheel drive 12%, rear-wheel drive 15%, all-wheel drive 18-20%",
+                "Drag area: small hatchback 0.60-0.65 · saloon 0.60-0.66 · SUV 0.80-0.90",
               ],
             },
             {
               h: "Why it differs from a dyno",
               p: [
-                "This is an estimate, not a measurement. CdA and drivetrain loss are typical library values; on a modified car both may have changed. The ± band next to the result shows that uncertainty.",
-                "The figure is also raw — no SAE or DIN correction is applied — so a hot-day run and a cool-day run are not directly comparable.",
+                "This is an estimate, not a measurement. Drag area and drivetrain loss are typical library values; on a modified car both may have changed. The ± band next to the result reflects that uncertainty.",
+                "The result is also uncorrected — no SAE or DIN correction is applied. A figure taken on a hot day is not directly comparable to one taken on a cool day.",
               ],
             },
             {
               h: "Getting closer to the truth",
               ul: [
-                "Run the same stretch in both directions and average; wind and grade largely cancel out.",
-                "Put the car on a scale. Guessed weight is the most common error.",
+                "Run the same stretch in both directions and average the two; wind and gradient largely cancel out.",
+                "Put the car on a weighbridge. A guessed weight is the most common error.",
                 "Keep the fuel level the same for every run.",
                 "Check your speedometer against GPS.",
-                "On a modified car, enter CdA and drivetrain loss manually.",
+                "On a modified car, enter drag area and drivetrain loss yourself.",
+              ],
+            },
+            {
+              h: "Where your data lives",
+              p: [
+                "Your cars, runs and notes are stored only on your phone. Nothing is sent to a server, no account is needed, and the app works without an internet connection.",
+                "The trade-off: deleting the app deletes your records, and they cannot be recovered. They do not move to a new phone either.",
+              ],
+            },
+            {
+              h: "Language",
+              p: [
+                "The app opens in your device language; Turkish, English and Spanish are supported. Change it from the language button at the top right and your choice is remembered.",
+                "To see the walkthrough again, tap the How it works link at the bottom of the screen.",
               ],
             },
             {
               h: "Bugs and requests",
               p: [
-                "Write in if a car is missing, a value looks wrong or a translation is off. Include the model, engine and year and it gets fixed faster.",
+                "Write in if a car is missing from the library, a value looks wrong, or a translation is off. Include the model, engine and year and it gets fixed sooner.",
               ],
             },
           ],
           mail: "Send an email",
           subject: "Güç Hesabı · Support",
         },
+
         es: {
           title: "Soporte",
           warn:
-            "Mide en circuito cerrado o en vía sin tráfico. No hagas pruebas de velocidad en carretera abierta.",
+            "Haz las mediciones en circuito cerrado o en vía sin tráfico. Nunca hagas pruebas de velocidad en vía pública.",
           sections: [
             {
               h: "Cómo medir",
               ol: [
-                "Elige tu coche; el CdA, la pérdida de transmisión y el peso se rellenan solos. Ajusta el peso según conductor y combustible.",
-                "Busca un tramo llano, limpio y sin viento. Introduce la pendiente si la conoces: incluso una leve inclinación desplaza el resultado.",
-                "Acelera de 100 a 200 en una sola marcha y cronometra. Usa 60-160 en coches diésel o de motor pequeño.",
-                "Introduce temperatura, altitud y humedad.",
-                "El resultado se actualiza al instante; no hay botón.",
+                "Toca la barra del coche en la parte superior de la pantalla de medición y elige uno de tu garaje. El área frontal, la pérdida de transmisión y el peso se rellenan solos.",
+                "Corrige el peso según la realidad: conductor, pasajeros y el combustible del depósito.",
+                "Busca asfalto llano, limpio y sin viento. Introduce la pendiente si la conoces; incluso una leve desvía el resultado.",
+                "Acelera de 100 a 200 en una sola marcha y cronometra. Usa el rango 60-160 en motores pequeños y diésel.",
+                "Abre la fila de condiciones del aire e introduce temperatura, altitud y humedad.",
+                "El resultado aparece al instante. Pulsa GUARDAR MEDICIÓN para conservarlo y añade una nota si quieres.",
+              ],
+            },
+            {
+              h: "Garaje e historial",
+              p: [
+                "La pestaña del garaje guarda tus coches. Al tocar uno lo eliges para medir; el lápiz de esa fila edita sus valores y la papelera lo borra.",
+                "Cada medición que guardas se archiva bajo el coche elegido. El gráfico muestra la evolución y, debajo, tu última cifra, la mejor y la ganancia total desde la primera. Cada medición muestra además la diferencia con la anterior.",
+                "Mide antes de una modificación y otra vez después, y la ganancia deja de ser una suposición.",
+              ],
+            },
+            {
+              h: "Simulador y modo objetivo",
+              p: [
+                "El simulador parte de una medición guardada. Mueve los controles de peso y potencia y el tiempo se resuelve de nuevo: qué pasaría con 80 kg menos o con 50 CV más.",
+                "El modo objetivo hace lo contrario. Introduce la potencia que buscas y devuelve el tiempo correspondiente. Si la cifra es demasiado baja para vencer las resistencias, lo indica.",
+                "Con más de una medición guardada, CAMBIAR MEDICIÓN te deja elegir la base.",
+              ],
+            },
+            {
+              h: "Un coche que no está en la biblioteca",
+              p: [
+                "En la pestaña del garaje pulsa LO INTRODUZCO YO. Dale un nombre, área frontal, pérdida de transmisión y peso; el coche entra en tu garaje y funciona como cualquier otro.",
+                "Si no conoces los valores, elige antes un coche parecido y abre el formulario: los campos llegan con los valores de ese coche, listos para ajustar.",
+              ],
+              ul: [
+                "Pérdida de transmisión: tracción delantera 12%, trasera 15%, total 18-20%",
+                "Área frontal: utilitario 0,60-0,65 · berlina 0,60-0,66 · SUV 0,80-0,90",
               ],
             },
             {
               h: "Por qué difiere de un banco de potencia",
               p: [
-                "Es una estimación, no una medición. El CdA y la pérdida de transmisión son valores típicos de la biblioteca; en un coche modificado ambos pueden haber cambiado. La banda ± junto al resultado refleja esa incertidumbre.",
-                "Además el dato es bruto, sin corrección SAE ni DIN, así que una tirada con calor y otra con frío no son directamente comparables.",
+                "Es una estimación, no una medición. El área frontal y la pérdida de transmisión son valores típicos de la biblioteca; en un coche modificado ambos pueden haber cambiado. La banda ± junto al resultado refleja esa incertidumbre.",
+                "El resultado además es bruto, sin corrección SAE ni DIN. Una cifra tomada un día caluroso no es directamente comparable con otra tomada un día fresco.",
               ],
             },
             {
               h: "Cómo afinar el resultado",
               ul: [
-                "Haz el mismo tramo en los dos sentidos y promedia; el viento y la pendiente se cancelan en gran parte.",
-                "Pesa el coche. El peso estimado es el error más frecuente.",
-                "Mantén el mismo nivel de combustible en cada tirada.",
-                "Comprueba el velocímetro con el GPS.",
-                "En un coche modificado, introduce el CdA y la pérdida a mano.",
+                "Recorre el mismo tramo en los dos sentidos y promedia; el viento y la pendiente se compensan en buena medida.",
+                "Pesa el coche en una báscula. El peso estimado es el error más común.",
+                "Mantén el mismo nivel de combustible en cada medición.",
+                "Comprueba el velocímetro con GPS.",
+                "En un coche modificado, introduce tú el área frontal y la pérdida de transmisión.",
+              ],
+            },
+            {
+              h: "Dónde están tus datos",
+              p: [
+                "Tus coches, mediciones y notas se guardan solo en tu teléfono. No se envía nada a ningún servidor, no hace falta cuenta y la app funciona sin conexión.",
+                "La contrapartida: si borras la app se borran tus registros y no se pueden recuperar. Tampoco pasan a un teléfono nuevo.",
+              ],
+            },
+            {
+              h: "Idioma",
+              p: [
+                "La app se abre en el idioma de tu dispositivo; se admiten turco, inglés y español. Cámbialo con el botón de idioma arriba a la derecha y se recuerda tu elección.",
+                "Para ver la guía otra vez, toca el enlace Cómo funciona al final de la pantalla.",
               ],
             },
             {
               h: "Errores y sugerencias",
               p: [
-                "Escríbenos si falta un coche, un valor parece erróneo o hay un fallo de traducción. Indica modelo, motor y año y se corrige antes.",
+                "Escribe si falta un coche, un valor parece erróneo o hay un fallo de traducción. Indica modelo, motor y año y se corrige antes.",
               ],
             },
           ],
@@ -253,6 +381,7 @@
           subject: "Güç Hesabı · Soporte",
         },
       };
+
 
       function render(lang) {
         var c = CONTENT[lang];
